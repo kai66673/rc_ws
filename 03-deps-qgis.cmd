@@ -5,6 +5,7 @@ set RC_DIR=%CD%
 if not exist "%RC_DIR%\dev" mkdir %RC_DIR%\dev
 
 set path=c:\cygwin64\bin;%path%
+rm -rf c:\OSGeo4W64\apps\Python36\sip\
 unzip -qq %RC_DIR%\packages\PyQt5_gpl-5.10.1.zip 'PyQt5_gpl-5.10.1/sip/*' -d %RC_DIR%\packages
 cp -r %RC_DIR%\packages\PyQt5_gpl-5.10.1\sip\ c:\OSGeo4W64\apps\Python36\
 rm -rf %RC_DIR%\packages\PyQt5_gpl-5.10.1
@@ -39,7 +40,7 @@ nmake
 nmake install
 if not exist "C:\OSGeo4W64\apps\Qt5\include\qwt6" mkdir C:\OSGeo4W64\apps\Qt5\include\qwt6
 cp c:/Qwt-6.1.3\include\*.* C:\OSGeo4W64\apps\Qt5\include\qwt6\
-cv c:/Qwt-6.1.3/lib/*.dll C:\OSGeo4W64\apps\Qt5\bin\
+cp c:/Qwt-6.1.3/lib/*.dll C:\OSGeo4W64\apps\Qt5\bin\
 cp c:/Qwt-6.1.3/lib/*.lib C:\OSGeo4W64\apps\Qt5\lib\
 rm -rf c:\Qwt-6.1.3
 
@@ -70,5 +71,6 @@ if not exist "%RC_DIR%\dev\QGIS" git clone git://github.com/qgis/QGIS.git
 cp %RC_DIR%\packages\utils\package-nightly.cmd %RC_DIR%\dev\QGIS\ms-windows\osgeo4w\
 cp %RC_DIR%\packages\utils\configonly.bat %RC_DIR%\dev\QGIS\ms-windows\osgeo4w\
 echo Generating Visual Studio solution for build QGIS...
+cd /d %RC_DIR%\dev\QGIS\ms-windows\osgeo4w
 %RC_DIR%\dev\QGIS\ms-windows\osgeo4w\configonly.bat
 

@@ -3,11 +3,13 @@
 cd /d %~dp0
 set RC_DIR=%CD%
 
-cd /d c:\OSGeo4W64\apps\Python36
-python -m pip install PyQt5==5.10.1
+set path=c:\cygwin64\bin;%path%
 
 cp c:\OSGeo4W64\bin\python3.dll c:\OSGeo4W64\apps\Python36\
 cp c:\OSGeo4W64\bin\python36.dll c:\OSGeo4W64\apps\Python36\
+
+cd /d c:\OSGeo4W64\apps\Python36
+python -m pip install PyQt5==5.10.1
 
 if not exist "%RC_DIR%\Work" mkdir %RC_DIR%\Work
 cd /D %RC_DIR%\Work
@@ -27,7 +29,6 @@ if not exist "%RC_DIR%\Work\pyphased" git clone git@bitbucket.org:almaz_mipt/pyp
 if not exist "%RC_DIR%\Work\pyphased_utils" git clone git@bitbucket.org:almaz_mipt/pyphased_utils.git
 if not exist "%RC_DIR%\Work\radar_sim" git clone git@bitbucket.org:almaz_mipt/radar_sim.git --recurse-submodules
 
-set path=c:\cygwin64\bin;%path%
 unzip -qq %RC_DIR%\packages\Cesium-1.47.zip 'Build/CesiumUnminified/*' -d %RC_DIR%\packages
 cp -r %RC_DIR%\packages\Build\CesiumUnminified\ %RC_DIR%\Work\radar_sim\cesium_research\
 rm -rf %RC_DIR%\packages\Build

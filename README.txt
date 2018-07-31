@@ -22,14 +22,13 @@
 - rasterio: https://www.lfd.uci.edu/~gohlke/pythonlibs
 
 Устанавливаем OSGeoW:	
-  osgeo4w-setup-x86_64.exe -k -A -R c:\OSGeo4W64 -P qgis-rel-dev,qgis-server
-  (+sip 4.19.8.1, qgis 3.2.1-1, qgis-common 3.2.1-1, qgis-grass-plugin-common 3.2.1-1, qgis-grass-plugin7 3.2.1-1, qgis-server 3.2.1-1, libzip-devel, gsl-devel, python3-devel)
+  osgeo4w-setup-x86_64.exe -k -A -R c:\OSGeo4W64 -P qgis-rel-dev,qgis-server,qgis-devel,libzip-devel,gsl-devel,python3-devel,qgis,qgis-common,qgis-grass-plugin-common,qgis-grass-plugin7
+  (+sip 4.19.8.1)
 
 1.1. Заменяем Qt на версию Qt-5.10.1 в OSGeo4W64 (ручками)  
  Устанавлеваем Qt-5.10.1 (msvc 2015 x86_64) в папку по умолчанию
   c:\QGIS\packages\qt-opensource-windows-x86-5.10.1.exe
- Заменяем содержимое в C:\OSGeo4W64\apps\Qt5 содержимим c:\Qt\Qt5.10.1\5.10.1\msvc2015_64\
- Копируем папку c:\rc_ws\packages\PyQt5_gpl-5.10.1.zip\PyQt5_gpl-5.10.1\sip в c:\OSGeo4W64\apps\Python36 (предварительно удалив папку sip в ней)
+ Заменяем содержимое в C:\OSGeo4W64\apps\Qt5 содержимим c:\Qt\Qt5.10.1\5.10.1\msvc2015_64\ (01-01-prepare.cmd)
 
 2. PyQt5(5.10.1) и всего для radar_cad (02-work-deps.cmd)
   
@@ -42,8 +41,12 @@
 Устанавливаем зависимости через pip
 
 3. Компилируем и устанавливаем QGIS и его зависимости (03-deps-qgis.cmd)
-
-  Выполнить C:\rc_ws\03-deps-qgis.cmd
+  Настраиваем sip
+    Копируем папку c:\rc_ws\packages\PyQt5_gpl-5.10.1.zip\PyQt5_gpl-5.10.1\sip в c:\OSGeo4W64\apps\Python36 (предварительно удалив папку sip в ней)
+	Корируем sip.exe в папку c:\OSGeo4W64\apps\Python36\Scripts из c:\OSGeo4W64\bin
+  Собираем Qt-зависимости (qscintilla2, qca, qwt, qtkeychain)
+  
+3.1
   Запускаем Visual Studio 2015 и открываем C:\rc_ws\dev\QGIS\ms-windows\osgeo4w\build-qgis-qt-5.10.1-x86_64\qgis.sln 
   Делаем полную сборку, до тех пор пока есть ошибки. Если в какой-то момент кол-во ошибок перестанет уменьшаться... горько плачем...
   В случае удачи, обязательно выполнить сборку проекта INSTALL
